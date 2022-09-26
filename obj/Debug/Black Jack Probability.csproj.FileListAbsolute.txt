@@ -1,0 +1,15 @@
+C:\Users\Żalu\Desktop\Black Jack Probability\bin\Debug\Black Jack Probability.exe.config
+C:\Users\Żalu\Desktop\Black Jack Probability\bin\Debug\Black Jack Probability.exe
+C:\Users\Żalu\Desktop\Black Jack Probability\bin\Debug\Black Jack Probability.pdb
+C:\Users\Żalu\Desktop\Black Jack Probability\obj\Debug\Black Jack Probability.csproj.AssemblyReference.cache
+C:\Users\Żalu\Desktop\Black Jack Probability\obj\Debug\MainWindow.g.cs
+C:\Users\Żalu\Desktop\Black Jack Probability\obj\Debug\App.g.cs
+C:\Users\Żalu\Desktop\Black Jack Probability\obj\Debug\Black Jack Probability_MarkupCompile.cache
+C:\Users\Żalu\Desktop\Black Jack Probability\obj\Debug\Black Jack Probability_MarkupCompile.lref
+C:\Users\Żalu\Desktop\Black Jack Probability\obj\Debug\MainWindow.baml
+C:\Users\Żalu\Desktop\Black Jack Probability\obj\Debug\Black Jack Probability.g.resources
+C:\Users\Żalu\Desktop\Black Jack Probability\obj\Debug\Black_Jack_Probability.Properties.Resources.resources
+C:\Users\Żalu\Desktop\Black Jack Probability\obj\Debug\Black Jack Probability.csproj.GenerateResource.cache
+C:\Users\Żalu\Desktop\Black Jack Probability\obj\Debug\Black Jack Probability.csproj.CoreCompileInputs.cache
+C:\Users\Żalu\Desktop\Black Jack Probability\obj\Debug\Black Jack Probability.exe
+C:\Users\Żalu\Desktop\Black Jack Probability\obj\Debug\Black Jack Probability.pdb

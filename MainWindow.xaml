@@ -1,0 +1,34 @@
+﻿<Window x:Class="Black_Jack_Probability.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Black_Jack_Probability"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="612" Width="1052">
+    <Window.Resources>
+        <BitmapImage x:Key="cards" UriSource="/img/cards.png"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="669*"/>
+            <ColumnDefinition Width="266*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="background.jpg"/>
+        </Grid.Background>
+        <Image  Name ="deck" HorizontalAlignment="Left" Height="120" Margin="78,207,0,0" VerticalAlignment="Top" Width="85" Grid.Column="1"/>
+        <Grid x:Name="playerCards" HorizontalAlignment="Left" Height="264" Margin="374,290,0,0" VerticalAlignment="Top" Width="364"/>
+        <Grid x:Name="dealerCards" HorizontalAlignment="Left" Height="280" Margin="249,10,0,0" VerticalAlignment="Top" Width="364"/>
+        <Label x:Name="pPointsLabel" Content="0" HorizontalAlignment="Left" Margin="280,499,0,0" VerticalAlignment="Top" Height="55" Width="76" FontSize="18" BorderThickness="5" Background="{x:Null}"/>
+        <Label x:Name="dPointsLabel" Content="0" HorizontalAlignment="Left" Margin="618,10,0,0" VerticalAlignment="Top" Height="56" Width="86" FontSize="18"/>
+        <Button x:Name="hitBt" Content="Hit" HorizontalAlignment="Left" Margin="280,464,0,0" VerticalAlignment="Top" Width="76" Height="30" Click="hitBt_Click"/>
+        <Button x:Name="holdBt" Content="Hold" HorizontalAlignment="Left" Margin="280,430,0,0" VerticalAlignment="Top" Width="76" RenderTransformOrigin="-0.095,-0.911" Height="29" Click="holdBt_Click"/>
+        <Button x:Name="continueBt" Content="Continue" HorizontalAlignment="Left" Margin="60,264,0,0" VerticalAlignment="Top" Width="92" Height="42" Click="continueBt_Click" ScrollViewer.VerticalScrollBarVisibility="Hidden" Visibility="Hidden"/>
+        <Label x:Name="resultLabel" Content="" HorizontalAlignment="Left" Margin="414,264,0,0" VerticalAlignment="Top" Width="109" FontSize="20"/>
+        <Label x:Name="winsLabel" Content="Wins: 0" Grid.Column="1" HorizontalAlignment="Left" Margin="0,464,0,0" VerticalAlignment="Top" Height="43" Width="88" FontSize="18"/>
+        <Label x:Name="lossesLabel" Content="Losses: 0" Grid.Column="1" HorizontalAlignment="Left" Margin="88,464,0,0" VerticalAlignment="Top" Height="43" Width="88" FontSize="18"/>
+        <Label x:Name="drawsLabel" Content="Draws: 0" Grid.Column="1" HorizontalAlignment="Left" Margin="181,464,0,0" VerticalAlignment="Top" Height="43" Width="88" FontSize="18"/>
+
+    </Grid>
+</Window>
