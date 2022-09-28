@@ -18,17 +18,27 @@
             <ImageBrush ImageSource="background.jpg"/>
         </Grid.Background>
         <Image  Name ="deck" HorizontalAlignment="Left" Height="120" Margin="78,207,0,0" VerticalAlignment="Top" Width="85" Grid.Column="1"/>
-        <Grid x:Name="playerCards" HorizontalAlignment="Left" Height="264" Margin="374,290,0,0" VerticalAlignment="Top" Width="364"/>
+        <Grid x:Name="playerCards" HorizontalAlignment="Left" Height="264" Margin="374,290,0,0" VerticalAlignment="Top" Width="281">
+
+        </Grid>
         <Grid x:Name="dealerCards" HorizontalAlignment="Left" Height="280" Margin="249,10,0,0" VerticalAlignment="Top" Width="364"/>
-        <Label x:Name="pPointsLabel" Content="0" HorizontalAlignment="Left" Margin="280,499,0,0" VerticalAlignment="Top" Height="55" Width="76" FontSize="18" BorderThickness="5" Background="{x:Null}"/>
-        <Label x:Name="dPointsLabel" Content="0" HorizontalAlignment="Left" Margin="618,10,0,0" VerticalAlignment="Top" Height="56" Width="86" FontSize="18"/>
-        <Button x:Name="hitBt" Content="Hit" HorizontalAlignment="Left" Margin="280,464,0,0" VerticalAlignment="Top" Width="76" Height="30" Click="hitBt_Click"/>
-        <Button x:Name="holdBt" Content="Hold" HorizontalAlignment="Left" Margin="280,430,0,0" VerticalAlignment="Top" Width="76" RenderTransformOrigin="-0.095,-0.911" Height="29" Click="holdBt_Click"/>
-        <Button x:Name="continueBt" Content="Continue" HorizontalAlignment="Left" Margin="60,264,0,0" VerticalAlignment="Top" Width="92" Height="42" Click="continueBt_Click" ScrollViewer.VerticalScrollBarVisibility="Hidden" Visibility="Hidden"/>
-        <Label x:Name="resultLabel" Content="" HorizontalAlignment="Left" Margin="414,264,0,0" VerticalAlignment="Top" Width="109" FontSize="20"/>
-        <Label x:Name="winsLabel" Content="Wins: 0" Grid.Column="1" HorizontalAlignment="Left" Margin="0,464,0,0" VerticalAlignment="Top" Height="43" Width="88" FontSize="18"/>
-        <Label x:Name="lossesLabel" Content="Losses: 0" Grid.Column="1" HorizontalAlignment="Left" Margin="88,464,0,0" VerticalAlignment="Top" Height="43" Width="88" FontSize="18"/>
-        <Label x:Name="drawsLabel" Content="Draws: 0" Grid.Column="1" HorizontalAlignment="Left" Margin="181,464,0,0" VerticalAlignment="Top" Height="43" Width="88" FontSize="18"/>
+        <Label x:Name="pPointsLabel" Content="0" HorizontalAlignment="Left" Margin="280,499,0,0" VerticalAlignment="Top" Height="55" Width="76" FontSize="18" BorderThickness="6,5,5,5" Background="{x:Null}" Foreground="#FFCAC0C0" />
+        <Label Foreground="#FFCAC0C0" x:Name="dPointsLabel" Content="0" HorizontalAlignment="Left" Margin="618,10,0,0" VerticalAlignment="Top" Height="56" Width="86" FontSize="18"/>
+        <Button x:Name="hitBt" Content="Hit" HorizontalAlignment="Left" Margin="280,464,0,0" VerticalAlignment="Top" Width="76" Height="30" Click="hitBt_Click" Background="#FF9DFF5F" Foreground="#FF282121" BorderThickness="3" BorderBrush="#FF44690D" ClipToBounds="True"/>
+        <Button x:Name="holdBt" Content="Hold" HorizontalAlignment="Left" Margin="280,430,0,0" VerticalAlignment="Top" Width="76" RenderTransformOrigin="-0.095,-0.911" Height="29" Click="holdBt_Click" Background="#FF343131" Foreground="#FFD6B5B5" BorderThickness="3" OpacityMask="#FFD73D3D"/>
+        <Button x:Name="continueBt" Content="Continue" HorizontalAlignment="Left" Margin="60,264,0,0" VerticalAlignment="Top" Width="92" Height="42" Click="continueBt_Click" ScrollViewer.VerticalScrollBarVisibility="Hidden" Visibility="Hidden" BorderThickness="3" BorderBrush="#FF252020" Background="#FF1485FF"/>
+        <Label Foreground="#FFCAC0C0" x:Name="resultLabel" Content="" HorizontalAlignment="Left" Margin="414,264,0,0" VerticalAlignment="Top" Width="199" FontSize="36"/>
+        <Label Foreground="#FFCAC0C0" x:Name="winsLabel" Content="Wins: 0" Grid.Column="1" HorizontalAlignment="Left" Margin="0,464,0,0" VerticalAlignment="Top" Height="43" Width="88" FontSize="18"/>
+        <Label Foreground="#FFCAC0C0" x:Name="lossesLabel" Content="Losses: 0" Grid.Column="1" HorizontalAlignment="Left" Margin="88,464,0,0" VerticalAlignment="Top" Height="43" Width="88" FontSize="18"/>
+        <Label Foreground="#FFCAC0C0" x:Name="drawsLabel" Content="Draws: 0" Grid.Column="1" HorizontalAlignment="Left" Margin="181,464,0,0" VerticalAlignment="Top" Height="43" Width="88" FontSize="18"/>
+        <Button x:Name="betBt" Content="Place bet" HorizontalAlignment="Left" Margin="655,464,0,0" VerticalAlignment="Top" Width="76" Height="30" Click="betBt_Click" Background="#FF9DFF5F" Foreground="#FF282121" BorderThickness="3" BorderBrush="#FF44690D" ClipToBounds="True"/>
+        <Label x:Name="moneyLabel" Content="1000 $" HorizontalAlignment="Left" Margin="655,499,0,0" VerticalAlignment="Top" Height="55" Width="76" FontSize="18" BorderThickness="6,5,5,5" Background="{x:Null}" Foreground="#FFCAC0C0" />
+        <Label x:Name="betLabel" Content="" HorizontalAlignment="Left" Margin="662,350,0,0" VerticalAlignment="Top" Height="55" Width="76" FontSize="18" BorderThickness="6,5,5,5" Background="{x:Null}" Foreground="#FFCAC0C0" />
+        <Button x:Name="b5" Content="5$" HorizontalAlignment="Left" Margin="625,429,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="b5_Click"/>
+        <Button x:Name="b20" Content="20$" HorizontalAlignment="Left" Margin="660,410,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="b20_Click"/>
+        <Button x:Name="b50" Content="50$" HorizontalAlignment="Left" Margin="695,410,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="b50_Click"/>
+        <Button x:Name="b100" Content="100$" HorizontalAlignment="Left" Margin="730,429,0,0" VerticalAlignment="Top" Width="30" Height="30" Grid.ColumnSpan="2" Click="b100_Click"/>
+        <Button x:Name="clearBt" Content="clear" HorizontalAlignment="Left" Margin="0,375,0,0" VerticalAlignment="Top" Width="30" Height="30" Click="clearBt_Click" Grid.Column="1" Background="#FFE02C2C" Foreground="#FFEEEAEA"/>
 
     </Grid>
 </Window>

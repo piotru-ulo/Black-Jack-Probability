@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 
 
 namespace Black_Jack_Probability
@@ -46,6 +47,8 @@ namespace Black_Jack_Probability
         public int losses = 0;
         public int draws = 0;
         public int pBJ = 0;
+        public double money = 1000;
+        public double bet = 0;
 
 
         public int dealerPoints = 0;
@@ -64,7 +67,6 @@ namespace Black_Jack_Probability
                 (BitmapSource)this.Resources["cards"],
             new Int32Rect(167*2,243*4, 167, 243));
             deck.Source = cb;
-            dealStart();
 
         }
 
@@ -102,7 +104,7 @@ namespace Black_Jack_Probability
             Image pcard = new Image();
             pcard.Source = new CroppedBitmap(
                 (BitmapSource)this.Resources["cards"],
-            new Int32Rect(167 * allDecks.LastOrDefault().Item1, 243 * allDecks.LastOrDefault().Item2, 167, 243));
+            new Int32Rect(167 * allDecks.LastOrDefault().Item1 + fixDisp(allDecks.LastOrDefault().Item1), 243 * allDecks.LastOrDefault().Item2, 167, 243));
             pcard.Margin = new Thickness(a, b, c, d);
             pcard.Height = 120;
             pcard.Width = 85;
@@ -169,11 +171,16 @@ namespace Black_Jack_Probability
             if (playerPoints > 21)
             {
                 resultLabel.Content = "You Lose";
+                resultLabel.Foreground = Brushes.Red;
+                bet = 0;
                 losses++;
             }
             else if(playerPoints == 21 && pBJ == 2)
             {
                 resultLabel.Content = "Bjack Jack!";
+                resultLabel.Foreground = Brushes.Gold;
+                money = money + bet * 2.5;
+                bet = 0;
                 wins++;
             }
             else
@@ -183,23 +190,33 @@ namespace Black_Jack_Probability
                     display(false, 0, dcoor, dcoor, 0);
                     dBJ++;
                     dcoor += 15;
+                    
                 }
                 if (dealerPoints > playerPoints && dealerPoints <= 21 || (dealerPoints==21 && dBJ==2))
                 {
                     losses++;
                     resultLabel.Content = "You Lose";
+                    bet = 0;
+                    resultLabel.Foreground = Brushes.Red;
                 }
                 else if (dealerPoints == playerPoints)
                 {
                     resultLabel.Content = "Draw";
+                    money = money + bet;
+                    bet = 0;
+                    resultLabel.Foreground = Brushes.White;
                     draws++;
                 }
                 else
                 {
                     resultLabel.Content = "You Win";
+                    money = money + bet * 2;
+                    bet = 0;
+                    resultLabel.Foreground = Brushes.Green;
                     wins++;
                 }
             }
+            changeBet();
             winsLabel.Content = "Wins: " + wins.ToString();
             lossesLabel.Content = "Losses: " + losses.ToString();
             drawsLabel.Content = "Draws: " + draws.ToString();
@@ -244,9 +261,84 @@ namespace Black_Jack_Probability
             hitBt.IsEnabled = true;
             holdBt.IsEnabled = true;
             resultLabel.Visibility = Visibility.Hidden;
+            b5.IsEnabled = true; b20.IsEnabled = true; b50.IsEnabled = true; b100.IsEnabled = true; clearBt.IsEnabled = true; betBt.IsEnabled = true;
+            pPointsLabel.Content = 0;
+            dPointsLabel.Content = 0;
+        }
 
-            dealStart();
+        private void betBt_Click(object sender, RoutedEventArgs e)
+        {
+            if(bet>0)
+            {
+                dealStart();
+                b5.IsEnabled = false; b20.IsEnabled = false; b50.IsEnabled = false; b100.IsEnabled = false; clearBt.IsEnabled = false; betBt.IsEnabled = false;
+            }
 
+        }
+
+        private void b5_Click(object sender, RoutedEventArgs e)
+        {
+            if(money>=5)
+            {
+                money -= 5;
+                bet += 5;
+                changeBet();
+            }
+        }
+
+        private void b20_Click(object sender, RoutedEventArgs e)
+        {
+            if (money >= 20)
+            {
+                money -= 20;
+                bet += 20;
+                changeBet();
+            }
+
+        }
+
+        private void b50_Click(object sender, RoutedEventArgs e)
+        {
+            if (money >= 50)
+            {
+                money -= 50;
+                bet += 50;
+                changeBet();
+            }
+
+        }
+
+        private void b100_Click(object sender, RoutedEventArgs e)
+        {
+            if (money >= 100)
+            {
+                money -= 100;
+                bet += 100;
+                changeBet();
+            }
+
+        }
+        private void clearBt_Click(object sender, RoutedEventArgs e)
+        {
+            money = money + bet;
+            bet = 0;
+            changeBet();
+        }
+
+        public void changeBet()
+        {
+            moneyLabel.Content = money + " $";
+            betLabel.Content = bet + " $";
+        }
+
+        public int fixDisp(int x)
+        {
+            if (x < 6)
+                return 0;
+            else if (x < 11)
+                return 3;
+            else
+                return 4;
         }
     }
 
