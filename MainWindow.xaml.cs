@@ -72,15 +72,21 @@ namespace Black_Jack_Probability
 
         public void dealStart()
         {
+            doubleBt.IsEnabled = true;
+            hitBt.IsEnabled = true;
+            holdBt.IsEnabled = true;
             if (deals == 6)
             {
                 allDecks = new List<Tuple<int, int>>();
-                for (int i = 0; i <= 12; i++)
+                for (int j = 0; j < 3; j++)
                 {
-                    allDecks.Add(new Tuple<int, int>(i, 0));
-                    allDecks.Add(new Tuple<int, int>(i, 1));
-                    allDecks.Add(new Tuple<int, int>(i, 2));
-                    allDecks.Add(new Tuple<int, int>(i, 3));
+                    for (int i = 0; i <= 12; i++)
+                    {
+                        allDecks.Add(new Tuple<int, int>(i, 0));
+                        allDecks.Add(new Tuple<int, int>(i, 1));
+                        allDecks.Add(new Tuple<int, int>(i, 2));
+                        allDecks.Add(new Tuple<int, int>(i, 3));
+                    }
                 }
                 allDecks.Shuffle();
                 deals = 0;
@@ -96,6 +102,10 @@ namespace Black_Jack_Probability
                 hitBt.IsEnabled = false;
                 holdBt.IsEnabled = false;
             }
+
+            bustProbability();
+            bjProbability();
+            winProbability();
 
         }
 
@@ -164,6 +174,10 @@ namespace Black_Jack_Probability
             }
             allDecks.RemoveAt(allDecks.Count - 1);
 
+
+            bustProbability();
+            bjProbability();
+
         }
 
         public void dealersTurn()
@@ -212,7 +226,7 @@ namespace Black_Jack_Probability
                     resultLabel.Content = "You Win";
                     money = money + bet * 2;
                     bet = 0;
-                    resultLabel.Foreground = Brushes.Green;
+                    resultLabel.Foreground = Brushes.LightGreen;
                     wins++;
                 }
             }
@@ -228,6 +242,7 @@ namespace Black_Jack_Probability
         private void hitBt_Click(object sender, RoutedEventArgs e)
         {
             display(true, pcoor, 0, 0, pcoor);
+            doubleBt.IsEnabled = false;
             pBJ++;
             pcoor += 15;
             if (playerPoints >= 21)
@@ -236,12 +251,17 @@ namespace Black_Jack_Probability
                 hitBt.IsEnabled = false;
                 holdBt.IsEnabled = false;
             }
+            else
+            {
+                winProbability();
+            }
         }
 
         private void holdBt_Click(object sender, RoutedEventArgs e)
         {
             hitBt.IsEnabled = false;
             holdBt.IsEnabled = false;
+            doubleBt.IsEnabled = false;
             dealersTurn();
 
         }
@@ -258,12 +278,15 @@ namespace Black_Jack_Probability
             dcoor = 15;
             playerCards.Children.Clear();
             dealerCards.Children.Clear();
-            hitBt.IsEnabled = true;
-            holdBt.IsEnabled = true;
             resultLabel.Visibility = Visibility.Hidden;
             b5.IsEnabled = true; b20.IsEnabled = true; b50.IsEnabled = true; b100.IsEnabled = true; clearBt.IsEnabled = true; betBt.IsEnabled = true;
+
+
             pPointsLabel.Content = 0;
             dPointsLabel.Content = 0;
+            pbLabel.Content = "0%";
+            dpLabel.Content = "0%";
+            pwLabel.Content = "0%";
         }
 
         private void betBt_Click(object sender, RoutedEventArgs e)
@@ -340,6 +363,134 @@ namespace Black_Jack_Probability
             else
                 return 4;
         }
+
+        private void doubleBt_Click(object sender, RoutedEventArgs e)
+        {
+            if(money>=bet)
+            {
+                money -= bet;
+                bet  = bet*2;
+                changeBet();
+                hitBt_Click(new object(), new RoutedEventArgs());
+                holdBt_Click(new object(), new RoutedEventArgs());
+            }
+        }
+
+        // Probabilities
+
+        public void bjProbability()
+        {
+            List<Tuple<int, int>> list = new List<Tuple<int, int>>();
+            if (deals == 5)
+            {
+                list = new List<Tuple<int, int>>();
+                for (int j = 0; j < 3; j++)
+                {
+                    for (int i = 0; i <= 12; i++)
+                    {
+                        list.Add(new Tuple<int, int>(i, 0));
+                        list.Add(new Tuple<int, int>(i, 1));
+                        list.Add(new Tuple<int, int>(i, 2));
+                        list.Add(new Tuple<int, int>(i, 3));
+                    }
+                }
+                list.Shuffle();
+            }
+            else
+            {
+                list = allDecks;
+            }
+
+            double tens = 0.0, aces = 0.0;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].Item1>=9)
+                    tens += 1.0;
+                if (list[i].Item1 == 0)
+                    aces += 1.0;
+            }
+
+            double pr = 100*((tens / list.Count) * (aces / (list.Count - 1)) + (aces / list.Count) * (tens / (list.Count - 1)));
+            bjprLablel.Content = Math.Round(pr, 2) + "%";
+
+
+
+        }
+
+        public void bustProbability()
+        {
+            double sum = 0.0;
+            for(int i=0; i<allDecks.Count; i++)
+            {
+                if(playerAce)
+                {
+                    if (playerPoints-10 + Math.Min(allDecks[i].Item1 + 1, 10) > 21)
+                        sum += 1.0;
+                }
+                else
+                {
+                    if (playerPoints + Math.Min(allDecks[i].Item1 + 1, 10) > 21)
+                        sum += 1.0;
+                }
+            }
+
+            double pr = (sum / allDecks.Count)*100;
+            pbLabel.Content = Math.Round(pr, 2) + "%";
+
+        }
+
+        public void winProbability()
+        {
+            double l = 0.0;
+            double d = 0.0;
+
+            for(int i=0; i<130000; i++)
+            {
+                List<Tuple<int, int>> tmp = new List<Tuple<int, int>>(allDecks);
+                tmp.Shuffle();
+                int dp = dealerPoints;
+                bool da = dealerAce;
+                while(dp<=16)
+                {
+                    if(tmp[tmp.Count-1].Item1 == 0)
+                    {
+                        if (dp + 11 <= 21)
+                            dp += 11;
+                        else
+                            dp += 1;
+                    }
+                    else
+                    {
+                        dp += Math.Min(tmp.LastOrDefault().Item1 + 1, 10);
+                    }
+                    if(dp>21 && da)
+                    {
+                        da = false;
+                        dp -= 10;
+                    }
+                    tmp.RemoveAt(tmp.Count - 1);
+                }
+
+                if(dp>playerPoints && dp<=21)
+                {
+                    l += 1.0;
+
+                }
+                else if(dp == playerPoints)
+                {
+                    d += 1.0;
+                }
+            }
+
+            double pr = (100.0 - ((l+d) / 130000) * 100);
+            pwLabel.Content = Math.Round(pr, 2) + "%";
+            pr =  (d / 130000) * 100;
+            dpLabel.Content = Math.Round(pr, 2) + "%";
+
+
+        }
+
+
     }
 
 
