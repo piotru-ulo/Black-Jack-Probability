@@ -1,0 +1,18 @@
+Black Jack Probability
+
+Desktop app that allows to play simple BJ game and shows some probabilities.
+
+Game rules:
+- 3 decks
+- shuffle every 6 deals
+- Dealer stands on 17 or higher
+
+
+Probabilities calculated by application:
+- Black Jack in next round
+- Player busting
+- Approximate probability of Players win on hold
+- Approximate probability of Draw
+
+
+
